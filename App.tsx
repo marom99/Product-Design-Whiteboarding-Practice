@@ -12,7 +12,7 @@ import Timer from './components/Timer';
 import SessionHistory from './components/SessionHistory';
 import VoiceInterface from './components/VoiceInterface';
 import CanvasView from './components/CanvasView';
-import { ChevronRightIcon, LoadingSpinner } from './components/icons';
+import { ChevronRightIcon, LoadingSpinner, EnterFullScreenIcon, ExitFullScreenIcon } from './components/icons';
 import TimerSetup from './components/TimerSetup';
 import TimeLowModal from './components/TimeLowModal';
 import CheatSheetView from './components/CheatSheetView';
@@ -62,6 +62,7 @@ const App: React.FC = () => {
   const [isTimeLowModalOpen, setIsTimeLowModalOpen] = useState<boolean>(false);
   const [textModeTab, setTextModeTab] = useState<'chat' | 'canvas' | 'cheatsheet'>('chat');
   const [isAwaitingReviewResponse, setIsAwaitingReviewResponse] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
 
 
   const activeSession = useMemo(() => {
@@ -372,6 +373,7 @@ const App: React.FC = () => {
   };
 
   const toggleSidebar = () => setIsSidebarVisible(prev => !prev);
+  const toggleFullScreen = () => setIsFullScreen(prev => !prev);
 
   const renderContent = () => {
     if (isSessionStarting && pendingSessionConfig) {
@@ -504,7 +506,7 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen font-sans bg-brand-bg">
-      <Header />
+      {!isFullScreen && <Header />}
       {isTimeLowModalOpen && activeSession && !activeSession.isFinished && (
         <TimeLowModal 
             onAddTime={handleAddTime}
@@ -521,7 +523,7 @@ const App: React.FC = () => {
           isSidebarVisible={isSidebarVisible}
           onToggleSidebar={toggleSidebar}
         />
-        <main className="flex-1 flex flex-col overflow-hidden">
+        <main className="flex-1 flex flex-col overflow-hidden relative">
           {!isSidebarVisible && (
             <button
               onClick={toggleSidebar}
@@ -529,6 +531,19 @@ const App: React.FC = () => {
               aria-label="Show session history"
             >
               <ChevronRightIcon className="h-6 w-6 text-brand-text-muted" />
+            </button>
+          )}
+          {setupStep === 'active' && activeSession && (
+            <button
+              onClick={toggleFullScreen}
+              className="absolute top-4 right-4 z-20 p-2 bg-brand-surface rounded-full border border-brand-secondary text-brand-text-muted hover:text-brand-text transition-colors"
+              aria-label={isFullScreen ? 'Exit Full Screen' : 'Enter Full Screen'}
+            >
+              {isFullScreen ? (
+                <ExitFullScreenIcon className="h-5 w-5" />
+              ) : (
+                <EnterFullScreenIcon className="h-5 w-5" />
+              )}
             </button>
           )}
           {renderContent()}
