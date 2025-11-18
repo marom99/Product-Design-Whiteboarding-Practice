@@ -194,6 +194,15 @@ const App: React.FC = () => {
           canvasState: {
                 task: promptText,
                 sections: { why: '', who: '', whenAndWhere: '', what: '', solve: '', how: '' },
+                sectionTimers: {
+                    why: 0,
+                    who: 0,
+                    whenAndWhere: 0,
+                    what: 0,
+                    prioritize: 0,
+                    solve: 0,
+                    how: 0,
+                },
                 prioritizationItems: [],
           }
         };
@@ -365,10 +374,14 @@ const App: React.FC = () => {
     setSetupStep('timer');
   };
   
-  const handleAddTime = () => {
+  const handleAddTime = (minutes: number) => {
     if (!activeSession) return;
-    const newDuration = (activeSession.duration || 0) + 300; // Add 5 minutes
+    const newDuration = (activeSession.duration || 0) + (minutes * 60);
     updateSession(activeSession.id, { duration: newDuration });
+    setIsTimeLowModalOpen(false);
+  };
+
+  const handleDismissTimeLowModal = () => {
     setIsTimeLowModalOpen(false);
   };
 
@@ -511,6 +524,7 @@ const App: React.FC = () => {
         <TimeLowModal 
             onAddTime={handleAddTime}
             onFinish={handleFinishSession}
+            onDismiss={handleDismissTimeLowModal}
         />
       )}
       <div className="flex-1 flex overflow-hidden relative">

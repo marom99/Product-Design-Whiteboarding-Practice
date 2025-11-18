@@ -40,6 +40,15 @@ export interface CanvasState {
     solveImageUrl?: string;
     how: string;
   };
+  sectionTimers: {
+    why: number;
+    who: number;
+    whenAndWhere: number;
+    what: number;
+    prioritize: number;
+    solve: number;
+    how: number;
+  };
   prioritizationItems: PrioritizationItem[];
 }
 

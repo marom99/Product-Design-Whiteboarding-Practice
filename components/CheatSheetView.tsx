@@ -13,6 +13,12 @@ interface CheatSheetViewProps {
 
 const tipsContent = [
     {
+        number: 0,
+        title: "Scoping",
+        subtitle: "Set the boundaries before you start.",
+        content: `**Define placement and audience first:** Ask yes/no: in-app or standalone; existing users or net-new. This prevents drifting beyond the core surface.\n\n**Set non-goals and guardrails early:** Write “out of scope” items and constraints (privacy, compliance, timeline, infra). It stops scope creep later.\n\n**Choose one differentiator:** Pick the single edge (e.g., network effects, unique data) and use it to prune features that don’t reinforce it.\n\n**Timebox decisions:** Spend 2–3 minutes to fix scope, then move on. Long scoping stalls momentum.\n\n**Paraphrase and confirm:** Mirror back answers and get a verbal “yes” to avoid hidden misalignments.\n\n**Capture assumptions visibly:** List assumptions you’re making and tag them with revisit points in v2.\n\n**Write a one-line scope summary at the top:** Example: “Design an in-app MVP for everyday users, software-only, optimizing engagement under privacy constraints.”`
+    },
+    {
         number: 1,
         title: "Why?",
         subtitle: "Understand your goal",
