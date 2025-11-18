@@ -1,0 +1,7 @@
+{
+  "name": "Product Design Whiteboard Practice",
+  "description": "An AI-powered chat application to practice for FAANG-level product design whiteboarding interviews. Users select a difficulty and solve randomly generated design problems while an AI interviewer guides and challenges their thought process.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
